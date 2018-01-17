@@ -1,0 +1,13 @@
+{
+  "env": {
+    "development": {
+      "plugins": {
+        "cacheDirectory": true,
+        "plugins": [
+            "react-native-web",
+            ["import", { "style": "css", "libraryName": "antd-mobile" }],
+        ],
+        "presets": ["react-native", ]
+    }
+  }
+}
