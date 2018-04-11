@@ -4,14 +4,21 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Counter from '../components/Counter'
 import { connect } from 'react-redux' // 引入connect函数
 import * as counterAction from '../actions/counterAction'
+import * as loginAction from '../actions/loginAction'
 
 class MainPage extends Component {
   static navigationOptions = {
     title: 'MainPage',
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.user == null) {
+      this.props.history.replace('/Login')
+    }
+  }
   logout() {
-    this.props.history.replace('/Login')
+    this.props.logoutFn()
+    this.props.resetFn()
   }
 
   render() {
@@ -31,7 +38,7 @@ class MainPage extends Component {
           style={{ marginTop: 50 }}
         >
           <View>
-            <Text>退出登录({user.name})</Text>
+            <Text>退出登录({user ? user.name : '未登录'})</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -57,5 +64,7 @@ export default connect(
   dispatch => ({
     incrementFn: () => dispatch(counterAction.increment()),
     decrementFn: () => dispatch(counterAction.decrement()),
+    resetFn: () => dispatch(counterAction.resetData()),
+    logoutFn: () => dispatch(loginAction.logout()),
   })
 )(MainPage)

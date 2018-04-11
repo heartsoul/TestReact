@@ -21,6 +21,26 @@ export function login() {
   }
 }
 
+export function logout() {
+  console.log('退出登录方法')
+  return dispatch => {
+    // 模拟用户登录
+    // let result = fetch('https://www.baidu.com/')
+    //     .then((res)=>{
+    dispatch(logoutSuccess())
+    // }).catch((e)=>{
+    //   dispatch(loginError(false));
+    // })
+  }
+}
+
+function logoutSuccess() {
+  console.log('log success')
+  return {
+    type: types.LOGIN_IN_INIT,
+  }
+}
+
 function isLogining() {
   return {
     type: types.LOGIN_IN_DOING,

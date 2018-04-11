@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { connect } from 'react-redux' // 引入connect函数
 import * as loginAction from '../actions/loginAction' // 导入action方法
+import Button from 'rn-test'
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -20,6 +21,7 @@ class LoginPage extends Component {
 
   render() {
     const { login } = this.props
+    console.log('login page')
     return (
       <View style={styles.container}>
         <Text>状态: {this.props.status}</Text>
@@ -28,6 +30,7 @@ class LoginPage extends Component {
             <Text>登录</Text>
           </View>
         </TouchableOpacity>
+        <Button text="登录测试" onClick={() => login()}/>
       </View>
     )
   }

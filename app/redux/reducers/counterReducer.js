@@ -12,13 +12,19 @@ export default function counter(state = initialState, action) {
         ...state,
         count: state.count + 1,
       }
-      break
+    // break
     case types.DECREMENT:
       return {
         ...state,
         count: state.count - 1,
       }
-      break
+    // break
+    case types.RESETDATA:
+      return {
+        ...state,
+        count: 0,
+      }
+    // break
     default:
       return state
   }

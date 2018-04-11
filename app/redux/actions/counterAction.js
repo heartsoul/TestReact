@@ -11,3 +11,9 @@ export function increment() {
     type: types.INCREMENT,
   }
 }
+
+export function resetData() {
+  return {
+    type: types.RESETDATA,
+  }
+}

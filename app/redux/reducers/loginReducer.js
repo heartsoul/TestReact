@@ -35,7 +35,7 @@ export default function loginIn(state = initialState, action) {
         user: action.user,
       }
 
-      break
+    // break
     case types.LOGIN_IN_ERROR:
       return {
         ...state,
@@ -47,7 +47,19 @@ export default function loginIn(state = initialState, action) {
         user: null,
       }
 
-      break
+    // break
+    case types.LOGIN_IN_INIT:
+      return {
+        ...state,
+
+        status: '点击重新登录',
+
+        isSuccess: false,
+
+        user: null,
+      }
+
+    // break
     default:
       return state
   }
