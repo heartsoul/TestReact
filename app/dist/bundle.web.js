@@ -5,7 +5,10 @@
     /** *** */
   }
   /** *** */ const parentHotUpdateCallback = window.webpackHotUpdate
-  /** *** */ window.webpackHotUpdate = /** *** */ function webpackHotUpdateCallback(chunkId, moreModules) {
+  /** *** */ window.webpackHotUpdate = /** *** */ function webpackHotUpdateCallback(
+    chunkId,
+    moreModules
+  ) {
     // eslint-disable-line no-unused-vars
     /** *** */ hotAddUpdateChunk(chunkId, moreModules)
     /** *** */ if (parentHotUpdateCallback)
@@ -20,13 +23,9 @@
     /** *** */ const script = document.createElement('script')
     /** *** */ script.type = 'text/javascript'
     /** *** */ script.charset = 'utf-8'
-    /** *** */ script.src =
-      `${__webpack_require__.p 
-      }${ 
-      chunkId 
-      }.${ 
-      hotCurrentHash 
-      }.hot-update.js`
+    /** *** */ script.src = `${
+      __webpack_require__.p
+    }${chunkId}.${hotCurrentHash}.hot-update.js`
     /** *** */ /** *** */ head.appendChild(script)
     /** *** */
   }
@@ -35,13 +34,14 @@
   /** *** */ function hotDownloadManifest(requestTimeout) {
     // eslint-disable-line no-unused-vars
     /** *** */ requestTimeout = requestTimeout || 10000
-    /** *** */ return new Promise(((resolve, reject) => {
+    /** *** */ return new Promise((resolve, reject) => {
       /** *** */ if (typeof XMLHttpRequest === 'undefined')
         /** *** */ return reject(new Error('No browser support'))
       /** *** */ try {
         /** *** */ var request = new XMLHttpRequest()
-        /** *** */ var requestPath =
-          `${__webpack_require__.p  }${  hotCurrentHash  }.hot-update.json`
+        /** *** */ var requestPath = `${
+          __webpack_require__.p
+        }${hotCurrentHash}.hot-update.json`
         /** *** */ request.open('GET', requestPath, true)
         /** *** */ request.timeout = requestTimeout
         /** *** */ request.send(null)
@@ -55,7 +55,7 @@
         /** *** */ if (request.status === 0) {
           /** *** */ // timeout
           /** *** */ reject(
-            new Error(`Manifest request to ${  requestPath  } timed out.`)
+            new Error(`Manifest request to ${requestPath} timed out.`)
           )
           /** *** */
         } else if (request.status === 404) {
@@ -65,7 +65,7 @@
         } else if (request.status !== 200 && request.status !== 304) {
           /** *** */ // other failure
           /** *** */ reject(
-            new Error(`Manifest request to ${  requestPath  } failed.`)
+            new Error(`Manifest request to ${requestPath} failed.`)
           )
           /** *** */
         } else {
@@ -84,7 +84,7 @@
         /** *** */
       }
       /** *** */
-    }))
+    })
     /** *** */
   }
   /** *** */
@@ -108,7 +108,9 @@
     /** *** */ const fn = function(request) {
       /** *** */ if (me.hot.active) {
         /** *** */ if (installedModules[request]) {
-          /** *** */ if (installedModules[request].parents.indexOf(moduleId) < 0)
+          /** *** */ if (
+            installedModules[request].parents.indexOf(moduleId) < 0
+          )
             /** *** */ installedModules[request].parents.push(moduleId)
           /** *** */
         } else {
@@ -121,10 +123,7 @@
         /** *** */
       } else {
         /** *** */ console.warn(
-          `[HMR] unexpected require(${ 
-            request 
-            }) from disposed module ${ 
-            moduleId}`
+          `[HMR] unexpected require(${request}) from disposed module ${moduleId}`
         )
         /** *** */ hotCurrentParents = []
         /** *** */
@@ -163,7 +162,7 @@
       /** *** */ hotChunksLoading++
       /** *** */ return __webpack_require__
         .e(chunkId)
-        .then(finishChunkLoading, (err) => {
+        .then(finishChunkLoading, err => {
           /** *** */ finishChunkLoading()
           /** *** */ throw err
           /** *** */
@@ -294,7 +293,7 @@
   /** *** */
 
   /** *** */ function toModuleId(id) {
-    /** *** */ const isNumber = `${+id  }` === id
+    /** *** */ const isNumber = `${+id}` === id
     /** *** */ return isNumber ? +id : id
     /** *** */
   }
@@ -305,9 +304,7 @@
       throw new Error('check() is only allowed in idle status')
     /** *** */ hotApplyOnUpdate = apply
     /** *** */ hotSetStatus('check')
-    /** *** */ return hotDownloadManifest(hotRequestTimeout).then((
-      update
-    ) => {
+    /** *** */ return hotDownloadManifest(hotRequestTimeout).then(update => {
       /** *** */ if (!update) {
         /** *** */ hotSetStatus('idle')
         /** *** */ return null
@@ -320,14 +317,14 @@
       /** *** */
 
       /** *** */ hotSetStatus('prepare')
-      /** *** */ const promise = new Promise(((resolve, reject) => {
+      /** *** */ const promise = new Promise((resolve, reject) => {
         /** *** */ hotDeferred = {
           /** *** */ resolve,
           /** *** */ reject,
           /** *** */
         }
         /** *** */
-      }))
+      })
       /** *** */ hotUpdate = {}
       /** *** */ const chunkId = 0
       /** *** */ {
@@ -400,16 +397,16 @@
       /** *** */ // avoid triggering uncaught exception warning in Chrome.
       /** *** */ // See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
       /** *** */ Promise.resolve()
-        .then(() => 
-          /** *** */  hotApply(hotApplyOnUpdate)
+        .then(
+          () => /** *** */ hotApply(hotApplyOnUpdate)
           /** *** */
         )
         .then(
-          /** *** */ (result) => {
+          /** *** */ result => {
             /** *** */ deferred.resolve(result)
             /** *** */
           },
-          /** *** */ (err) => {
+          /** *** */ err => {
             /** *** */ deferred.reject(err)
             /** *** */
           }
@@ -450,8 +447,8 @@
       /** *** */ const outdatedDependencies = {}
       /** *** */
 
-      /** *** */ const queue = outdatedModules.slice().map((id) => 
-        /** *** */  ({
+      /** *** */ const queue = outdatedModules.slice().map(
+        id => /** *** */ ({
           /** *** */ chain: [id],
           /** *** */ id,
           /** *** */
@@ -545,7 +542,7 @@
 
     /** *** */ const warnUnexpectedRequire = function warnUnexpectedRequire() {
       /** *** */ console.warn(
-        `[HMR] unexpected require(${  result.moduleId  }) to disposed module`
+        `[HMR] unexpected require(${result.moduleId}) to disposed module`
       )
       /** *** */
     }
@@ -571,29 +568,30 @@
         /** *** */ let doDispose = false
         /** *** */ let chainInfo = ''
         /** *** */ if (result.chain) {
-          /** *** */ chainInfo =
-            `\nUpdate propagation: ${  result.chain.join(' -> ')}`
+          /** *** */ chainInfo = `\nUpdate propagation: ${result.chain.join(
+            ' -> '
+          )}`
           /** *** */
         }
         /** *** */ switch (result.type) {
           /** *** */ case 'self-declined':
-            /** *** */ if (options.onDeclined) /** *** */ options.onDeclined(result)
+            /** *** */ if (options.onDeclined)
+              /** *** */ options.onDeclined(result)
             /** *** */ if (!options.ignoreDeclined)
               /** *** */ abortError = new Error(
-                `Aborted because of self decline: ${ 
-                  result.moduleId 
-                  }${chainInfo}`
+                `Aborted because of self decline: ${
+                  result.moduleId
+                }${chainInfo}`
               )
             /** *** */ break
           /** *** */ case 'declined':
-            /** *** */ if (options.onDeclined) /** *** */ options.onDeclined(result)
+            /** *** */ if (options.onDeclined)
+              /** *** */ options.onDeclined(result)
             /** *** */ if (!options.ignoreDeclined)
               /** *** */ abortError = new Error(
-                `Aborted because of declined dependency: ${ 
-                  result.moduleId 
-                  } in ${ 
-                  result.parentId 
-                  }${chainInfo}`
+                `Aborted because of declined dependency: ${
+                  result.moduleId
+                } in ${result.parentId}${chainInfo}`
               )
             /** *** */ break
           /** *** */ case 'unaccepted':
@@ -601,19 +599,21 @@
               /** *** */ options.onUnaccepted(result)
             /** *** */ if (!options.ignoreUnaccepted)
               /** *** */ abortError = new Error(
-                `Aborted because ${  moduleId  } is not accepted${  chainInfo}`
+                `Aborted because ${moduleId} is not accepted${chainInfo}`
               )
             /** *** */ break
           /** *** */ case 'accepted':
-            /** *** */ if (options.onAccepted) /** *** */ options.onAccepted(result)
+            /** *** */ if (options.onAccepted)
+              /** *** */ options.onAccepted(result)
             /** *** */ doApply = true
             /** *** */ break
           /** *** */ case 'disposed':
-            /** *** */ if (options.onDisposed) /** *** */ options.onDisposed(result)
+            /** *** */ if (options.onDisposed)
+              /** *** */ options.onDisposed(result)
             /** *** */ doDispose = true
             /** *** */ break
           /** *** */ default:
-            /** *** */ throw new Error(`Unexception type ${  result.type}`)
+            /** *** */ throw new Error(`Unexception type ${result.type}`)
           /** *** */
         }
         /** *** */ if (abortError) {
@@ -671,7 +671,7 @@
     /** *** */
 
     /** *** */ /** *** */ hotSetStatus('dispose')
-    /** *** */ Object.keys(hotAvailableFilesMap).forEach((chunkId) => {
+    /** *** */ Object.keys(hotAvailableFilesMap).forEach(chunkId => {
       /** *** */ if (hotAvailableFilesMap[chunkId] === false) {
         /** *** */ hotDisposeChunk(chunkId)
         /** *** */
@@ -814,7 +814,11 @@
     } // Load self accepted modules
     /** *** */
 
-    /** *** */ /** *** */ for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
+    /** *** */ /** *** */ for (
+      i = 0;
+      i < outdatedSelfAcceptedModules.length;
+      i++
+    ) {
       /** *** */ const item = outdatedSelfAcceptedModules[i]
       /** *** */ moduleId = item.module
       /** *** */ hotCurrentParents = [moduleId]
@@ -876,10 +880,10 @@
     /** *** */
 
     /** *** */ hotSetStatus('idle')
-    /** *** */ return new Promise(((resolve) => {
+    /** *** */ return new Promise(resolve => {
       /** *** */ resolve(outdatedModules)
       /** *** */
-    }))
+    })
     /** *** */
   } // The module cache
   /** *** */
@@ -922,7 +926,11 @@
   /** *** */
   /** *** */ /** *** */ __webpack_require__.c = installedModules // define getter function for harmony exports
   /** *** */
-  /** *** */ /** *** */ __webpack_require__.d = function(exports, name, getter) {
+  /** *** */ /** *** */ __webpack_require__.d = function(
+    exports,
+    name,
+    getter
+  ) {
     /** *** */ if (!__webpack_require__.o(exports, name)) {
       /** *** */ Object.defineProperty(exports, name, {
         /** *** */ configurable: false,
@@ -959,7 +967,9 @@
     return hotCurrentHash
   } // Load entry module and return exports
   /** *** */
-  /** *** */ /** *** */ return hotCreateRequire(90)((__webpack_require__.s = 90))
+  /** *** */ /** *** */ return hotCreateRequire(90)(
+    (__webpack_require__.s = 90)
+  )
   /** *** */
 })(
   /** ********************************************************************* */
@@ -1005,8 +1015,6 @@
     },
     /* 1 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       if (false) {
         module.exports = require('./cjs/react.production.min.js')
       } else {
@@ -1042,7 +1050,6 @@
     },
     /* 3 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright 2014-2015, Facebook, Inc.
        * All rights reserved.
@@ -1078,16 +1085,16 @@
           if (format.length < 10 || /^[s\W]*$/.test(format)) {
             throw new Error(
               `${'The warning format should be able to uniquely identify this ' +
-                'warning. Please, use a more descriptive format than: '}${ 
-                format}`
+                'warning. Please, use a more descriptive format than: '}${format}`
             )
           }
 
           if (!condition) {
             let argIndex = 0
-            const message =
-              `Warning: ${ 
-              format.replace(/%s/g, () => args[argIndex++])}`
+            const message = `Warning: ${format.replace(
+              /%s/g,
+              () => args[argIndex++]
+            )}`
             if (typeof console !== 'undefined') {
               console.error(message)
             }
@@ -1106,7 +1113,6 @@
     },
     /* 4 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -1149,9 +1155,7 @@
           } else {
             const args = [a, b, c, d, e, f]
             let argIndex = 0
-            error = new Error(
-              format.replace(/%s/g, () => args[argIndex++])
-            )
+            error = new Error(format.replace(/%s/g, () => args[argIndex++]))
             error.name = 'Invariant Violation'
           }
 
@@ -1166,8 +1170,6 @@
     },
     /* 5 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _modality = __webpack_require__(159)
@@ -1202,7 +1204,6 @@
     },
     /* 6 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2014-present, Facebook, Inc.
        *
@@ -1235,9 +1236,10 @@
           }
 
           let argIndex = 0
-          const message =
-            `Warning: ${ 
-            format.replace(/%s/g, () => args[argIndex++])}`
+          const message = `Warning: ${format.replace(
+            /%s/g,
+            () => args[argIndex++]
+          )}`
           if (typeof console !== 'undefined') {
             console.error(message)
           }
@@ -1283,7 +1285,6 @@
     },
     /* 7 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright 2013-2015, Facebook, Inc.
        * All rights reserved.
@@ -1321,9 +1322,7 @@
           } else {
             const args = [a, b, c, d, e, f]
             let argIndex = 0
-            error = new Error(
-              format.replace(/%s/g, () => args[argIndex++])
-            )
+            error = new Error(format.replace(/%s/g, () => args[argIndex++]))
             error.name = 'Invariant Violation'
           }
 
@@ -1338,8 +1337,6 @@
     },
     /* 8 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -1379,7 +1376,6 @@
     },
     /* 9 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -1419,7 +1415,6 @@
     },
     /* 10 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /*
 object-assign
 (c) Sindre Sorhus
@@ -1459,16 +1454,16 @@ object-assign
           // https://bugs.chromium.org/p/v8/issues/detail?id=3056
           const test2 = {}
           for (let i = 0; i < 10; i++) {
-            test2[`_${  String.fromCharCode(i)}`] = i
+            test2[`_${String.fromCharCode(i)}`] = i
           }
-          const order2 = Object.getOwnPropertyNames(test2).map((n) => test2[n])
+          const order2 = Object.getOwnPropertyNames(test2).map(n => test2[n])
           if (order2.join('') !== '0123456789') {
             return false
           }
 
           // https://bugs.chromium.org/p/v8/issues/detail?id=3056
           const test3 = {}
-          'abcdefghijklmnopqrst'.split('').forEach((letter) => {
+          'abcdefghijklmnopqrst'.split('').forEach(letter => {
             test3[letter] = letter
           })
           if (
@@ -1518,7 +1513,6 @@ object-assign
     },
     /* 11 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (binding) */ __webpack_require__.d(
         __webpack_exports__,
         'a',
@@ -1555,7 +1549,7 @@ object-assign
         () => createPath
       )
       var addLeadingSlash = function addLeadingSlash(path) {
-        return path.charAt(0) === '/' ? path : `/${  path}`
+        return path.charAt(0) === '/' ? path : `/${path}`
       }
 
       var stripLeadingSlash = function stripLeadingSlash(path) {
@@ -1563,7 +1557,7 @@ object-assign
       }
 
       var hasBasename = function hasBasename(path, prefix) {
-        return new RegExp(`^${  prefix  }(\\/|\\?|#|$)`, 'i').test(path)
+        return new RegExp(`^${prefix}(\\/|\\?|#|$)`, 'i').test(path)
       }
 
       var stripBasename = function stripBasename(path, prefix) {
@@ -1606,10 +1600,10 @@ object-assign
         let path = pathname || '/'
 
         if (search && search !== '?')
-          path += search.charAt(0) === '?' ? search : `?${  search}`
+          path += search.charAt(0) === '?' ? search : `?${search}`
 
         if (hash && hash !== '#')
-          path += hash.charAt(0) === '#' ? hash : `#${  hash}`
+          path += hash.charAt(0) === '#' ? hash : `#${hash}`
 
         return path
       }
@@ -1618,8 +1612,6 @@ object-assign
     },
     /* 12 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _applyLayout = __webpack_require__(57)
@@ -1686,8 +1678,7 @@ object-assign
       function _inherits(subClass, superClass) {
         if (typeof superClass !== 'function' && superClass !== null) {
           throw new TypeError(
-            `Super expression must either be null or a function, not ${ 
-              typeof superClass}`
+            `Super expression must either be null or a function, not ${typeof superClass}`
           )
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -1765,12 +1756,10 @@ object-assign
 
           if (true) {
             _react2.default.Children.toArray(this.props.children).forEach(
-              (item) => {
+              item => {
                 ;(0, _invariant2.default)(
                   typeof item !== 'string',
-                  `Unexpected text node: ${ 
-                    item 
-                    }. A text node cannot be a child of a <View>.`
+                  `Unexpected text node: ${item}. A text node cannot be a child of a <View>.`
                 )
               }
             )
@@ -1844,8 +1833,6 @@ object-assign
     },
     /* 13 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       /**
        * Copyright (c) 2015-present, Facebook, Inc.
@@ -1878,13 +1865,8 @@ object-assign
         if (color === undefined || color === null) {
           if (isRequired) {
             return new Error(
-              `Required ${ 
-                location 
-                } \`${ 
-                propFullName || propName 
-                }\` was not specified in \`${ 
-                componentName 
-                }\`.`
+              `Required ${location} \`${propFullName ||
+                propName}\` was not specified in \`${componentName}\`.`
             )
           }
           return
@@ -1904,15 +1886,8 @@ object-assign
 
         if (normalizeColor(color) === null) {
           return new Error(
-            `Invalid ${ 
-              location 
-              } \`${ 
-              propFullName || propName 
-              }\` supplied to \`${ 
-              componentName 
-              }\`: ${ 
-              color 
-              }\n` +
+            `Invalid ${location} \`${propFullName ||
+              propName}\` supplied to \`${componentName}\`: ${color}\n` +
               `Valid color formats are\n  - '#f0f' (#rgb)\n  - '#f0fc' (#rgba)\n  - '#ff00ff' (#rrggbb)\n  - '#ff00ff00' (#rrggbbaa)\n  - 'rgb(255, 255, 255)'\n  - 'rgba(255, 255, 255, 1.0)'\n  - 'hsl(360, 100%, 100%)'\n  - 'hsla(360, 100%, 100%, 1.0)'\n  - 'transparent'\n  - 'red'\n  - 0xff00ff00 (0xrrggbbaa)\n`
           )
         }
@@ -1936,8 +1911,6 @@ object-assign
     },
     /* 14 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       Object.defineProperty(exports, '__esModule', {
         value: true,
       })
@@ -1953,8 +1926,6 @@ object-assign
     },
     /* 15 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       function checkDCE() {
         /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
         if (
@@ -1996,7 +1967,6 @@ object-assign
     },
     /* 16 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (binding) */ __webpack_require__.d(
         __webpack_exports__,
         'a',
@@ -2051,14 +2021,14 @@ object-assign
 
           if (location.search) {
             if (location.search.charAt(0) !== '?')
-              location.search = `?${  location.search}`
+              location.search = `?${location.search}`
           } else {
             location.search = ''
           }
 
           if (location.hash) {
             if (location.hash.charAt(0) !== '#')
-              location.hash = `#${  location.hash}`
+              location.hash = `#${location.hash}`
           } else {
             location.hash = ''
           }
@@ -2072,9 +2042,7 @@ object-assign
         } catch (e) {
           if (e instanceof URIError) {
             throw new URIError(
-              `Pathname "${ 
-                location.pathname 
-                }" could not be decoded. ` +
+              `Pathname "${location.pathname}" could not be decoded. ` +
                 `This is likely caused by an invalid percent-encoding.`
             )
           } else {
@@ -2120,7 +2088,7 @@ object-assign
     },
     /* 17 */
     /** */ function(module, exports, __webpack_require__) {
-      (function(global) {
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -2279,7 +2247,6 @@ object-assign
 
         const INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         const _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -2303,15 +2270,13 @@ object-assign
 
           if (rewireData[variableName] === undefined) {
             return _get_original__(variableName)
-          } 
-            const value = rewireData[variableName]
+          }
+          const value = rewireData[variableName]
 
-            if (value === INTENTIONAL_UNDEFINED) {
-              return undefined
-            } 
-              return value
-            
-          
+          if (value === INTENTIONAL_UNDEFINED) {
+            return undefined
+          }
+          return value
         }
 
         function _get_original__(variableName) {
@@ -2349,9 +2314,8 @@ object-assign
 
           if (rewireData[variableName] === undefined) {
             return _set_original__(variableName, value)
-          } 
-            return (rewireData[variableName] = value)
-          
+          }
+          return (rewireData[variableName] = value)
         }
 
         function _set_original__(variableName, _value) {
@@ -2379,7 +2343,7 @@ object-assign
               ? 'undefined'
               : _typeof(variableName)) === 'object'
           ) {
-            Object.keys(variableName).forEach((name) => {
+            Object.keys(variableName).forEach(name => {
               rewireData[name] = variableName[name]
             })
           } else {
@@ -2412,13 +2376,13 @@ object-assign
           const previousValues = {}
 
           function reset() {
-            rewiredVariableNames.forEach((variableName) => {
+            rewiredVariableNames.forEach(variableName => {
               rewireData[variableName] = previousValues[variableName]
             })
           }
 
           return function(callback) {
-            rewiredVariableNames.forEach((variableName) => {
+            rewiredVariableNames.forEach(variableName => {
               previousValues[variableName] = rewireData[variableName]
               rewireData[variableName] = object[variableName]
             })
@@ -2448,7 +2412,6 @@ object-assign
     },
     /* 18 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(
         121
@@ -2484,8 +2447,6 @@ object-assign
     },
     /* 19 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _applyLayout = __webpack_require__(57)
@@ -2546,8 +2507,7 @@ object-assign
       function _inherits(subClass, superClass) {
         if (typeof superClass !== 'function' && superClass !== null) {
           throw new TypeError(
-            `Super expression must either be null or a function, not ${ 
-              typeof superClass}`
+            `Super expression must either be null or a function, not ${typeof superClass}`
           )
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -2716,7 +2676,6 @@ object-assign
     },
     /* 20 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -2737,7 +2696,6 @@ object-assign
     },
     /* 21 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -2841,13 +2799,11 @@ object-assign
     },
     /* 22 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       const addLeadingSlash = (exports.addLeadingSlash = function addLeadingSlash(
         path
       ) {
-        return path.charAt(0) === '/' ? path : `/${  path}`
+        return path.charAt(0) === '/' ? path : `/${path}`
       })
 
       const stripLeadingSlash = (exports.stripLeadingSlash = function stripLeadingSlash(
@@ -2860,7 +2816,7 @@ object-assign
         path,
         prefix
       ) {
-        return new RegExp(`^${  prefix  }(\\/|\\?|#|$)`, 'i').test(path)
+        return new RegExp(`^${prefix}(\\/|\\?|#|$)`, 'i').test(path)
       })
 
       const stripBasename = (exports.stripBasename = function stripBasename(
@@ -2908,10 +2864,10 @@ object-assign
         let path = pathname || '/'
 
         if (search && search !== '?')
-          path += search.charAt(0) === '?' ? search : `?${  search}`
+          path += search.charAt(0) === '?' ? search : `?${search}`
 
         if (hash && hash !== '#')
-          path += hash.charAt(0) === '#' ? hash : `#${  hash}`
+          path += hash.charAt(0) === '#' ? hash : `#${hash}`
 
         return path
       })
@@ -2920,7 +2876,6 @@ object-assign
     },
     /* 23 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(
         3
       )
@@ -2979,8 +2934,7 @@ object-assign
       function _inherits(subClass, superClass) {
         if (typeof superClass !== 'function' && superClass !== null) {
           throw new TypeError(
-            `Super expression must either be null or a function, not ${ 
-              typeof superClass}`
+            `Super expression must either be null or a function, not ${typeof superClass}`
           )
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -3122,7 +3076,6 @@ object-assign
     },
     /* 24 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(
         3
       )
@@ -3192,7 +3145,7 @@ object-assign
 
           return function() {
             isActive = false
-            listeners = listeners.filter((item) => item !== listener)
+            listeners = listeners.filter(item => item !== listener)
           }
         }
 
@@ -3205,7 +3158,7 @@ object-assign
             args[_key] = arguments[_key]
           }
 
-          listeners.forEach((listener) => listener(...args))
+          listeners.forEach(listener => listener(...args))
         }
 
         return {
@@ -3222,7 +3175,6 @@ object-assign
     },
     /* 25 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(
         114
       )
@@ -3235,7 +3187,7 @@ object-assign
       let cacheCount = 0
 
       const compilePath = function compilePath(pattern, options) {
-        const cacheKey = `${  options.end  }${options.strict  }${options.sensitive}`
+        const cacheKey = `${options.end}${options.strict}${options.sensitive}`
         const cache = patternCache[cacheKey] || (patternCache[cacheKey] = {})
 
         if (cache[pattern]) return cache[pattern]
@@ -3312,7 +3264,6 @@ object-assign
     },
     /* 26 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = warning
       /**
        * Prints a warning in the console if it exists.
@@ -3343,7 +3294,6 @@ object-assign
     },
     /* 27 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(
         49
@@ -3413,7 +3363,6 @@ object-assign
     },
     /* 28 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(
         126
       )
@@ -3500,8 +3449,6 @@ object-assign
     },
     /* 29 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _NativeMethodsMixin = __webpack_require__(156)
@@ -3513,7 +3460,7 @@ object-assign
       }
 
       const applyNativeMethods = function applyNativeMethods(Component) {
-        Object.keys(_NativeMethodsMixin2.default).forEach((method) => {
+        Object.keys(_NativeMethodsMixin2.default).forEach(method => {
           if (!Component.prototype[method]) {
             Component.prototype[method] = _NativeMethodsMixin2.default[method]
           }
@@ -3534,8 +3481,6 @@ object-assign
     },
     /* 30 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _isDisabled = __webpack_require__(59)
@@ -3582,8 +3527,6 @@ object-assign
     },
     /* 31 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       /**
        * Copyright (c) 2017-present, Nicolas Gallagher.
@@ -3662,7 +3605,7 @@ object-assign
 
         // Ordered based on occurrences on Facebook codebase
         if ((match = matchers.hex6.exec(color))) {
-          return parseInt(`${match[1]  }ff`, 16) >>> 0
+          return parseInt(`${match[1]}ff`, 16) >>> 0
         }
 
         if (names.hasOwnProperty(color)) {
@@ -3692,13 +3635,14 @@ object-assign
         if ((match = matchers.hex3.exec(color))) {
           return (
             parseInt(
-              `${match[1] +
-              match[1] + // r
-              match[2] +
-              match[2] + // g
-              match[3] +
-              match[3]  // b
-                }ff`, // a
+              `${
+                match[1] +
+                match[1] + // r
+                match[2] +
+                match[2] + // g
+                  match[3] +
+                  match[3] // b
+              }ff`, // a
               16
             ) >>> 0
           )
@@ -3787,21 +3731,21 @@ object-assign
 
       // var INTEGER = '[-+]?\\d+';
       const NUMBER = '[-+]?\\d*\\.?\\d+'
-      const PERCENTAGE = `${NUMBER  }%`
+      const PERCENTAGE = `${NUMBER}%`
 
       function toArray(arrayLike) {
         return Array.prototype.slice.call(arrayLike, 0)
       }
 
       function call() {
-        return `\\(\\s*(${  toArray(arguments).join(')\\s*,\\s*(')  })\\s*\\)`
+        return `\\(\\s*(${toArray(arguments).join(')\\s*,\\s*(')})\\s*\\)`
       }
 
       var matchers = {
-        rgb: new RegExp(`rgb${  call(NUMBER, NUMBER, NUMBER)}`),
-        rgba: new RegExp(`rgba${  call(NUMBER, NUMBER, NUMBER, NUMBER)}`),
-        hsl: new RegExp(`hsl${  call(NUMBER, PERCENTAGE, PERCENTAGE)}`),
-        hsla: new RegExp(`hsla${  call(NUMBER, PERCENTAGE, PERCENTAGE, NUMBER)}`),
+        rgb: new RegExp(`rgb${call(NUMBER, NUMBER, NUMBER)}`),
+        rgba: new RegExp(`rgba${call(NUMBER, NUMBER, NUMBER, NUMBER)}`),
+        hsl: new RegExp(`hsl${call(NUMBER, PERCENTAGE, PERCENTAGE)}`),
+        hsla: new RegExp(`hsla${call(NUMBER, PERCENTAGE, PERCENTAGE, NUMBER)}`),
         hex3: /^#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
         hex4: /^#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
         hex6: /^#([0-9a-fA-F]{6})$/,
@@ -4023,8 +3967,6 @@ object-assign
     },
     /* 33 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ColorPropType = __webpack_require__(13)
@@ -4054,65 +3996,69 @@ object-assign
        *
        */
 
-      const TextStylePropTypes = Object.assign({}, _ViewStylePropTypes2.default, {
-        color: _ColorPropType2.default,
-        fontFamily: _propTypes.string,
-        fontFeatureSettings: _propTypes.string,
-        fontSize: numberOrString,
-        fontStyle: _propTypes.string,
-        fontWeight: _propTypes.string,
-        fontVariant: _propTypes.array,
-        letterSpacing: numberOrString,
-        lineHeight: numberOrString,
-        textAlign: (0, _propTypes.oneOf)([
-          'center',
-          'end',
-          'inherit',
-          'justify',
-          'justify-all',
-          'left',
-          'right',
-          'start',
-        ]),
-        textAlignVertical: _propTypes.string,
-        textDecorationColor: _ColorPropType2.default,
-        textDecorationLine: _propTypes.string,
-        textDecorationStyle: _propTypes.string,
-        textShadowColor: _ColorPropType2.default,
-        textShadowOffset: (0, _propTypes.shape)({
-          width: _propTypes.number,
-          height: _propTypes.number,
-        }),
-        textShadowRadius: _propTypes.number,
-        writingDirection: (0, _propTypes.oneOf)(['auto', 'ltr', 'rtl']),
-        /* @platform web */
-        textIndent: numberOrString,
-        textOverflow: _propTypes.string,
-        textRendering: (0, _propTypes.oneOf)([
-          'auto',
-          'geometricPrecision',
-          'optimizeLegibility',
-          'optimizeSpeed',
-        ]),
-        textTransform: (0, _propTypes.oneOf)([
-          'capitalize',
-          'lowercase',
-          'none',
-          'uppercase',
-        ]),
-        unicodeBidi: (0, _propTypes.oneOf)([
-          'normal',
-          'bidi-override',
-          'embed',
-          'isolate',
-          'isolate-override',
-          'plaintext',
-        ]),
-        whiteSpace: _propTypes.string,
-        wordWrap: _propTypes.string,
-        MozOsxFontSmoothing: _propTypes.string,
-        WebkitFontSmoothing: _propTypes.string,
-      })
+      const TextStylePropTypes = Object.assign(
+        {},
+        _ViewStylePropTypes2.default,
+        {
+          color: _ColorPropType2.default,
+          fontFamily: _propTypes.string,
+          fontFeatureSettings: _propTypes.string,
+          fontSize: numberOrString,
+          fontStyle: _propTypes.string,
+          fontWeight: _propTypes.string,
+          fontVariant: _propTypes.array,
+          letterSpacing: numberOrString,
+          lineHeight: numberOrString,
+          textAlign: (0, _propTypes.oneOf)([
+            'center',
+            'end',
+            'inherit',
+            'justify',
+            'justify-all',
+            'left',
+            'right',
+            'start',
+          ]),
+          textAlignVertical: _propTypes.string,
+          textDecorationColor: _ColorPropType2.default,
+          textDecorationLine: _propTypes.string,
+          textDecorationStyle: _propTypes.string,
+          textShadowColor: _ColorPropType2.default,
+          textShadowOffset: (0, _propTypes.shape)({
+            width: _propTypes.number,
+            height: _propTypes.number,
+          }),
+          textShadowRadius: _propTypes.number,
+          writingDirection: (0, _propTypes.oneOf)(['auto', 'ltr', 'rtl']),
+          /* @platform web */
+          textIndent: numberOrString,
+          textOverflow: _propTypes.string,
+          textRendering: (0, _propTypes.oneOf)([
+            'auto',
+            'geometricPrecision',
+            'optimizeLegibility',
+            'optimizeSpeed',
+          ]),
+          textTransform: (0, _propTypes.oneOf)([
+            'capitalize',
+            'lowercase',
+            'none',
+            'uppercase',
+          ]),
+          unicodeBidi: (0, _propTypes.oneOf)([
+            'normal',
+            'bidi-override',
+            'embed',
+            'isolate',
+            'isolate-override',
+            'plaintext',
+          ]),
+          whiteSpace: _propTypes.string,
+          wordWrap: _propTypes.string,
+          MozOsxFontSmoothing: _propTypes.string,
+          WebkitFontSmoothing: _propTypes.string,
+        }
+      )
 
       exports.default = TextStylePropTypes
 
@@ -4120,8 +4066,6 @@ object-assign
     },
     /* 34 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _AnimationPropTypes = __webpack_require__(62)
@@ -4138,7 +4082,9 @@ object-assign
 
       const _InteractionPropTypes = __webpack_require__(64)
 
-      const _InteractionPropTypes2 = _interopRequireDefault(_InteractionPropTypes)
+      const _InteractionPropTypes2 = _interopRequireDefault(
+        _InteractionPropTypes
+      )
 
       const _LayoutPropTypes = __webpack_require__(65)
 
@@ -4223,8 +4169,6 @@ object-assign
     },
     /* 35 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       const uppercasePattern = /[A-Z]/g
       const msPattern = /^ms-/
       const cache = {}
@@ -4244,8 +4188,6 @@ object-assign
     },
     /* 36 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _extends =
@@ -4325,7 +4267,12 @@ object-assign
 
       const flattenStyle = _StyleSheet2.default.flatten
 
-      const PRESS_RETENTION_OFFSET = { top: 20, left: 20, right: 20, bottom: 30 }
+      const PRESS_RETENTION_OFFSET = {
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 30,
+      }
 
       /**
        * A wrapper for making views respond properly to touches.
@@ -4396,7 +4343,7 @@ object-assign
           this.setNativeProps({
             style: {
               opacity: value,
-              transitionDuration: duration ? `${duration / 1000  }s` : '0s',
+              transitionDuration: duration ? `${duration / 1000}s` : '0s',
             },
           })
         },
@@ -4540,7 +4487,6 @@ object-assign
     },
     /* 37 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -4548,7 +4494,8 @@ object-assign
        * LICENSE file in the root directory of this source tree.
        */
 
-      const ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED'
+      const ReactPropTypesSecret =
+        'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED'
 
       module.exports = ReactPropTypesSecret
 
@@ -4556,7 +4503,6 @@ object-assign
     },
     /* 38 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright (c) 2013-present, Facebook, Inc.
        *
@@ -4597,7 +4543,6 @@ object-assign
     },
     /* 39 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__MemoryRouter__ = __webpack_require__(
         104
@@ -4676,7 +4621,6 @@ object-assign
     },
     /* 40 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       function isAbsolute(pathname) {
         return pathname.charAt(0) === '/'
@@ -4761,7 +4705,6 @@ object-assign
     },
     /* 41 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       const _typeof =
         typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
@@ -4806,7 +4749,7 @@ object-assign
 
           if (aKeys.length !== bKeys.length) return false
 
-          return aKeys.every((key) => valueEqual(a[key], b[key]))
+          return aKeys.every(key => valueEqual(a[key], b[key]))
         }
 
         return false
@@ -4818,7 +4761,6 @@ object-assign
     },
     /* 42 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       Object.defineProperty(__webpack_exports__, '__esModule', { value: true })
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(
         111
@@ -4875,7 +4817,6 @@ object-assign
     },
     /* 43 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (binding) */ __webpack_require__.d(
         __webpack_exports__,
         'b',
@@ -4925,7 +4866,7 @@ object-assign
       var addEventListener = function addEventListener(node, event, listener) {
         return node.addEventListener
           ? node.addEventListener(event, listener, false)
-          : node.attachEvent(`on${  event}`, listener)
+          : node.attachEvent(`on${event}`, listener)
       }
 
       var removeEventListener = function removeEventListener(
@@ -4935,7 +4876,7 @@ object-assign
       ) {
         return node.removeEventListener
           ? node.removeEventListener(event, listener, false)
-          : node.detachEvent(`on${  event}`, listener)
+          : node.detachEvent(`on${event}`, listener)
       }
 
       var getConfirmation = function getConfirmation(message, callback) {
@@ -4997,7 +4938,6 @@ object-assign
     },
     /* 44 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(
         3
       )
@@ -5059,8 +4999,7 @@ object-assign
       function _inherits(subClass, superClass) {
         if (typeof superClass !== 'function' && superClass !== null) {
           throw new TypeError(
-            `Super expression must either be null or a function, not ${ 
-              typeof superClass}`
+            `Super expression must either be null or a function, not ${typeof superClass}`
           )
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -5286,7 +5225,6 @@ object-assign
     },
     /* 45 */
     /** */ function(module, exports, __webpack_require__) {
-      
       /**
        * Copyright 2015, Yahoo! Inc.
        * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -5370,7 +5308,7 @@ object-assign
     },
     /* 46 */
     /** */ function(module, exports, __webpack_require__) {
-      (function(global) {
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -5498,7 +5436,6 @@ object-assign
 
         const INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         const _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -5522,15 +5459,13 @@ object-assign
 
           if (rewireData[variableName] === undefined) {
             return _get_original__(variableName)
-          } 
-            const value = rewireData[variableName]
+          }
+          const value = rewireData[variableName]
 
-            if (value === INTENTIONAL_UNDEFINED) {
-              return undefined
-            } 
-              return value
-            
-          
+          if (value === INTENTIONAL_UNDEFINED) {
+            return undefined
+          }
+          return value
         }
 
         function _get_original__(variableName) {
@@ -5550,9 +5485,8 @@ object-assign
 
           if (rewireData[variableName] === undefined) {
             return _set_original__(variableName, value)
-          } 
-            return (rewireData[variableName] = value)
-          
+          }
+          return (rewireData[variableName] = value)
         }
 
         function _set_original__(variableName, _value) {
@@ -5580,7 +5514,7 @@ object-assign
               ? 'undefined'
               : _typeof(variableName)) === 'object'
           ) {
-            Object.keys(variableName).forEach((name) => {
+            Object.keys(variableName).forEach(name => {
               rewireData[name] = variableName[name]
             })
           } else {
@@ -5613,13 +5547,13 @@ object-assign
           const previousValues = {}
 
           function reset() {
-            rewiredVariableNames.forEach((variableName) => {
+            rewiredVariableNames.forEach(variableName => {
               rewireData[variableName] = previousValues[variableName]
             })
           }
 
           return function(callback) {
-            rewiredVariableNames.forEach((variableName) => {
+            rewiredVariableNames.forEach(variableName => {
               previousValues[variableName] = rewireData[variableName]
               rewireData[variableName] = object[variableName]
             })
@@ -5649,7 +5583,6 @@ object-assign
     },
     /* 47 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (binding) */ __webpack_require__.d(
         __webpack_exports__,
         'b',
@@ -5695,7 +5628,6 @@ object-assign
     },
     /* 48 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = connectAdvanced
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(
         45
@@ -5755,8 +5687,7 @@ object-assign
       function _inherits(subClass, superClass) {
         if (typeof superClass !== 'function' && superClass !== null) {
           throw new TypeError(
-            `Super expression must either be null or a function, not ${ 
-              typeof superClass}`
+            `Super expression must either be null or a function, not ${typeof superClass}`
           )
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -5834,7 +5765,7 @@ object-assign
           getDisplayName =
             _ref$getDisplayName === undefined
               ? function(name) {
-                  return `ConnectAdvanced(${  name  })`
+                  return `ConnectAdvanced(${name})`
                 }
               : _ref$getDisplayName,
           _ref$methodName = _ref.methodName,
@@ -5861,7 +5792,7 @@ object-assign
             'withRef',
           ])
 
-        const subscriptionKey = `${storeKey  }Subscription`
+        const subscriptionKey = `${storeKey}Subscription`
         const version = hotReloadingVersion++
 
         const contextTypes = ((_contextTypes = {}),
@@ -5883,7 +5814,7 @@ object-assign
           __WEBPACK_IMPORTED_MODULE_1_invariant___default()(
             typeof WrappedComponent === 'function',
             `You must pass a component to the function returned by ` +
-              `connect. Instead received ${  JSON.stringify(WrappedComponent)}`
+              `connect. Instead received ${JSON.stringify(WrappedComponent)}`
           )
 
           const wrappedComponentName =
@@ -5923,17 +5854,9 @@ object-assign
 
               __WEBPACK_IMPORTED_MODULE_1_invariant___default()(
                 _this.store,
-                `Could not find "${ 
-                  storeKey 
-                  }" in either the context or props of ` +
-                  `"${ 
-                    displayName 
-                    }". Either wrap the root component in a <Provider>, ` +
-                  `or explicitly pass "${ 
-                    storeKey 
-                    }" as a prop to "${ 
-                    displayName 
-                    }".`
+                `Could not find "${storeKey}" in either the context or props of ` +
+                  `"${displayName}". Either wrap the root component in a <Provider>, ` +
+                  `or explicitly pass "${storeKey}" as a prop to "${displayName}".`
               )
 
               _this.initSelector()
@@ -5994,9 +5917,7 @@ object-assign
               __WEBPACK_IMPORTED_MODULE_1_invariant___default()(
                 withRef,
                 `To access the wrapped instance, you need to specify ` +
-                  `{ withRef: true } in the options argument of the ${ 
-                    methodName 
-                    }() call.`
+                  `{ withRef: true } in the options argument of the ${methodName}() call.`
               )
               return this.wrappedInstance
             }
@@ -6131,7 +6052,9 @@ object-assign
                 this.initSubscription()
                 if (shouldHandleStateChanges) {
                   this.subscription.trySubscribe()
-                  oldListeners.forEach((listener) => _this2.subscription.listeners.subscribe(listener))
+                  oldListeners.forEach(listener =>
+                    _this2.subscription.listeners.subscribe(listener)
+                  )
                 }
               }
             }
@@ -6148,7 +6071,6 @@ object-assign
     },
     /* 49 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (binding) */ __webpack_require__.d(
         __webpack_exports__,
         'a',
@@ -6440,7 +6362,6 @@ object-assign
     },
     /* 50 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(
         127
       )
@@ -6455,7 +6376,6 @@ object-assign
     },
     /* 51 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = warning
       /**
        * Prints a warning in the console if it exists.
@@ -6486,7 +6406,6 @@ object-assign
     },
     /* 52 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = compose
       /**
        * Composes single-argument functions from right to left. The rightmost
@@ -6518,16 +6437,18 @@ object-assign
           return funcs[0]
         }
 
-        return funcs.reduce((a, b) => function() {
-            return a(b(...arguments))
-          })
+        return funcs.reduce(
+          (a, b) =>
+            function() {
+              return a(b(...arguments))
+            }
+        )
       }
 
       /** */
     },
     /* 53 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = wrapMapToPropsConstant
       /* unused harmony export getDependsOnOwnProps */
       /* harmony export (immutable) */ __webpack_exports__.b = wrapMapToPropsFunc
@@ -6618,7 +6539,6 @@ object-assign
     },
     /* 54 */
     /** */ function(module, __webpack_exports__, __webpack_require__) {
-      
       /* harmony export (immutable) */ __webpack_exports__.a = verifyPlainObject
       /* harmony import */ const __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(
         28
@@ -6636,12 +6556,7 @@ object-assign
           )(value)
         ) {
           Object(__WEBPACK_IMPORTED_MODULE_1__warning__['a' /* default */])(
-            `${methodName 
-              }() in ${ 
-              displayName 
-              } must return a plain object. Instead received ${ 
-              value 
-              }.`
+            `${methodName}() in ${displayName} must return a plain object. Instead received ${value}.`
           )
         }
       }
@@ -6667,8 +6582,6 @@ object-assign
     },
     /* 57 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ExecutionEnvironment = __webpack_require__(9)
@@ -6695,12 +6608,12 @@ object-assign
 
       let id = 1
       const guid = function guid() {
-        return `r-${  id++}`
+        return `r-${id++}`
       }
 
       if (_ExecutionEnvironment.canUseDOM) {
         const triggerAll = function triggerAll() {
-          Object.keys(registry).forEach((key) => {
+          Object.keys(registry).forEach(key => {
             const instance = registry[key]
             instance._handleLayout()
           })
@@ -6791,8 +6704,6 @@ object-assign
     },
     /* 58 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _AccessibilityUtil = __webpack_require__(30)
@@ -6950,11 +6861,11 @@ object-assign
         }
         if (className && className.constructor === String) {
           domProps.className = domProps.className
-            ? `${domProps.className  } ${  className}`
+            ? `${domProps.className} ${className}`
             : className
         }
         if (component === 'a' && domProps.target === '_blank') {
-          domProps.rel = `${domProps.rel || ''  } noopener noreferrer`
+          domProps.rel = `${domProps.rel || ''} noopener noreferrer`
         }
         if (role && role.constructor === String && role !== 'label') {
           domProps.role = role
@@ -6978,8 +6889,6 @@ object-assign
     },
     /* 59 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       /**
        * Copyright (c) 2017-present, Nicolas Gallagher.
@@ -7000,8 +6909,6 @@ object-assign
     },
     /* 60 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ReactNativePropRegistry = __webpack_require__(61)
@@ -7072,8 +6979,6 @@ object-assign
     },
     /* 61 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       function _classCallCheck(instance, Constructor) {
@@ -7098,7 +7003,7 @@ object-assign
       let uniqueID = 1
 
       const createKey = function createKey(id) {
-        return `${prefix  }-${  id}`
+        return `${prefix}-${id}`
       }
 
       const ReactNativePropRegistry = (function() {
@@ -7125,7 +7030,7 @@ object-assign
           const key = createKey(id)
           const object = objects[key]
           if (!object) {
-            console.warn(`Invalid style with id \`${  id  }\`. Skipping ...`)
+            console.warn(`Invalid style with id \`${id}\`. Skipping ...`)
             return emptyObject
           }
           return object
@@ -7140,8 +7045,6 @@ object-assign
     },
     /* 62 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _propTypes = __webpack_require__(0)
@@ -7192,8 +7095,6 @@ object-assign
     },
     /* 63 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ColorPropType = __webpack_require__(13)
@@ -7257,8 +7158,6 @@ object-assign
     },
     /* 64 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _propTypes = __webpack_require__(0)
@@ -7295,8 +7194,6 @@ object-assign
     },
     /* 65 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _propTypes = __webpack_require__(0)
@@ -7445,8 +7342,6 @@ object-assign
     },
     /* 66 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ColorPropType = __webpack_require__(13)
@@ -7490,8 +7385,6 @@ object-assign
     },
     /* 67 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _propTypes = __webpack_require__(0)
@@ -7543,8 +7436,6 @@ object-assign
     },
     /* 68 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ReactNativeStyleResolver = __webpack_require__(166)
@@ -7572,8 +7463,6 @@ object-assign
     },
     /* 69 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _normalizeValue = __webpack_require__(70)
@@ -7704,10 +7593,9 @@ object-assign
         )
 
         if (color) {
-          const boxShadow =
-            `${offsetX  } ${  offsetY  } ${  blurRadius  } ${  color}`
+          const boxShadow = `${offsetX} ${offsetY} ${blurRadius} ${color}`
           resolvedStyle.boxShadow = style.boxShadow
-            ? `${style.boxShadow  }, ${  boxShadow}`
+            ? `${style.boxShadow}, ${boxShadow}`
             : boxShadow
         } else if (style.boxShadow) {
           resolvedStyle.boxShadow = style.boxShadow
@@ -7718,7 +7606,10 @@ object-assign
        * Text Shadow
        */
 
-      const resolveTextShadow = function resolveTextShadow(resolvedStyle, style) {
+      const resolveTextShadow = function resolveTextShadow(
+        resolvedStyle,
+        style
+      ) {
         let _ref2 = style.textShadowOffset || defaultOffset,
           height = _ref2.height,
           width = _ref2.width
@@ -7732,8 +7623,7 @@ object-assign
         const color = (0, _processColor2.default)(style.textShadowColor)
 
         if (color) {
-          resolvedStyle.textShadow =
-            `${offsetX  } ${  offsetY  } ${  blurRadius  } ${  color}`
+          resolvedStyle.textShadow = `${offsetX} ${offsetY} ${blurRadius} ${color}`
         }
       }
 
@@ -7746,7 +7636,7 @@ object-assign
       const mapTransform = function mapTransform(transform) {
         const type = Object.keys(transform)[0]
         const value = (0, _normalizeValue2.default)(type, transform[type])
-        return `${type  }(${  value  })`
+        return `${type}(${value})`
       }
 
       // [1,2,3,4,5,6] => 'matrix3d(1,2,3,4,5,6)'
@@ -7754,7 +7644,7 @@ object-assign
         transformMatrix
       ) {
         const matrix = transformMatrix.join(',')
-        return `matrix3d(${  matrix  })`
+        return `matrix3d(${matrix})`
       }
 
       const resolveTransform = function resolveTransform(resolvedStyle, style) {
@@ -7837,7 +7727,7 @@ object-assign
             case 'flex': {
               if (value > 0) {
                 resolvedStyle.flex = value
-                resolvedStyle.flexGrow = `${value  } !important`
+                resolvedStyle.flexGrow = `${value} !important`
                 resolvedStyle.flexShrink = '1 !important'
               } else if (value === 0) {
                 resolvedStyle.flexGrow = '0 !important'
@@ -7855,10 +7745,10 @@ object-assign
             case 'flexShrink':
             case 'flexBasis': {
               if (value != null) {
-                const hasImportant = (`${  value}`).indexOf('!important') > -1
+                const hasImportant = `${value}`.indexOf('!important') > -1
                 resolvedStyle[prop] = hasImportant
                   ? value
-                  : `${value  } !important`
+                  : `${value} !important`
               }
               break
             }
@@ -7953,8 +7843,6 @@ object-assign
     },
     /* 70 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _unitlessNumbers = __webpack_require__(71)
@@ -7985,8 +7873,6 @@ object-assign
     },
     /* 71 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       const unitlessNumbers = {
         animationIterationCount: true,
@@ -8040,8 +7926,8 @@ object-assign
       const prefixKey = function prefixKey(prefix, key) {
         return prefix + key.charAt(0).toUpperCase() + key.substring(1)
       }
-      Object.keys(unitlessNumbers).forEach((prop) => {
-        prefixes.forEach((prefix) => {
+      Object.keys(unitlessNumbers).forEach(prop => {
+        prefixes.forEach(prefix => {
           unitlessNumbers[prefixKey(prefix, prop)] = unitlessNumbers[prop]
         })
       })
@@ -8052,13 +7938,13 @@ object-assign
     },
     /* 72 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _ExecutionEnvironment = __webpack_require__(9)
 
-      const _ExecutionEnvironment2 = _interopRequireDefault(_ExecutionEnvironment)
+      const _ExecutionEnvironment2 = _interopRequireDefault(
+        _ExecutionEnvironment
+      )
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { default: obj }
@@ -8131,8 +8017,6 @@ object-assign
     },
     /* 73 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _I18nManager = __webpack_require__(72)
@@ -8294,8 +8178,6 @@ object-assign
     },
     /* 74 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       exports.prefixInlineStyles = undefined
 
@@ -8330,7 +8212,7 @@ object-assign
 
         // React@15 removed undocumented support for fallback values in
         // inline-styles. Revert array values to the standard CSS value
-        Object.keys(prefixedStyles).forEach((prop) => {
+        Object.keys(prefixedStyles).forEach(prop => {
           const value = prefixedStyles[prop]
           if (Array.isArray(value)) {
             prefixedStyles[prop] = value[value.length - 1]
@@ -8344,8 +8226,6 @@ object-assign
     },
     /* 75 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       Object.defineProperty(exports, '__esModule', {
         value: true,
       })
@@ -8359,8 +8239,6 @@ object-assign
     },
     /* 76 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
 
       const _hyphenateStyleName = __webpack_require__(35)
@@ -8399,11 +8277,9 @@ object-assign
         const name = (0, _hyphenateStyleName2.default)(prop)
         const value = (0, _normalizeValue2.default)(prop, val)
         if (Array.isArray(val)) {
-          return val
-            .map((v) => `${name  }:${  v}`)
-            .join(';')
+          return val.map(v => `${name}:${v}`).join(';')
         }
-        return `${name  }:${  value}`
+        return `${name}:${value}`
       }
 
       /**
@@ -8427,8 +8303,6 @@ object-assign
     },
     /* 77 */
     /** */ function(module, exports, __webpack_require__) {
-      
-
       exports.__esModule = true
       /* eslint-disable */
 
@@ -36390,7 +36264,8 @@ object-assign
     /* 119 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -36541,7 +36416,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -36756,7 +36630,8 @@ object-assign
     /* 120 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -37070,7 +36945,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -37926,7 +37800,8 @@ object-assign
     /* 128 */
     /***/ function(module, __webpack_exports__, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         /** Detect free variable `global` from Node.js. */
         var freeGlobal =
           typeof global == 'object' &&
@@ -38103,7 +37978,8 @@ object-assign
     /* 134 */
     /***/ function(module, __webpack_exports__, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global, module) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global, module) {
         /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__(
           136
         )
@@ -38906,7 +38782,8 @@ object-assign
     /* 144 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -39056,7 +38933,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -39235,7 +39111,8 @@ object-assign
     /* 145 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -39365,7 +39242,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -39544,7 +39420,8 @@ object-assign
     /* 146 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -39693,7 +39570,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -39873,7 +39749,8 @@ object-assign
     /* 147 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -39985,7 +39862,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -40159,7 +40035,8 @@ object-assign
     /* 148 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         Object.defineProperty(exports, '__esModule', {
           value: true,
         })
@@ -40318,7 +40195,6 @@ object-assign
 
         var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__'
         var _RewireAPI__ = {}
-
         ;(function() {
           function addPropertyToAPIObject(name, value) {
             Object.defineProperty(_RewireAPI__, name, {
@@ -43669,7 +43545,8 @@ object-assign
     /* 194 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         /**
          * Copyright (c) 2014-present, Facebook, Inc.
          *
@@ -43706,7 +43583,8 @@ object-assign
     /* 195 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         /**
          * Copyright (c) 2013-present, Facebook, Inc.
          *
@@ -43731,7 +43609,8 @@ object-assign
     /* 196 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         /**
          * Copyright (c) 2013-present, Facebook, Inc.
          *
@@ -47892,7 +47771,8 @@ to return true:wantsResponderID|                            |
     /* 211 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict'
-      /* WEBPACK VAR INJECTION */ ;(function(global) {
+      /* WEBPACK VAR INJECTION */
+      ;(function(global) {
         /*
  *  Copyright (c) 2015-present, Facebook, Inc.
  *  All rights reserved.

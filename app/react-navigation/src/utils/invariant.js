@@ -7,8 +7,6 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-
-
 /**
  * Use invariant() to assert state which your program assumes to be true.
  *
@@ -42,9 +40,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
     } else {
       const args = [a, b, c, d, e, f]
       let argIndex = 0
-      error = new Error(
-        format.replace(/%s/g, () => args[argIndex++])
-      )
+      error = new Error(format.replace(/%s/g, () => args[argIndex++]))
       error.name = 'Invariant Violation'
     }
 

@@ -316,14 +316,14 @@ export default (routeConfigs, stackConfig = {}) => {
           return {
             ...state,
           }
-        } 
-          return {
-            ...state,
-            isTransitioning: action.immediate !== true,
-            index: 0,
-            routes: [state.routes[0]],
-          }
-        
+        }
+        return {
+          ...state,
+          isTransitioning: action.immediate !== true,
+          index: 0,
+          routes: [state.routes[0]],
+        }
+
         return state
       }
 
@@ -518,7 +518,7 @@ export default (routeConfigs, stackConfig = {}) => {
       // get the action for the path AFTER the matched path for this
       // router
       let nestedAction
-      const nestedQueryString = queryString ? `?${  queryString}` : ''
+      const nestedQueryString = queryString ? `?${queryString}` : ''
       if (childRouters[matchedRouteName]) {
         nestedAction = childRouters[matchedRouteName].getActionForPathAndParams(
           pathMatch.slice(pathMatchKeys.length).join('/') + nestedQueryString

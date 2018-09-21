@@ -53,17 +53,16 @@ export default class TouchableItem extends React.Component<Props> {
           <View style={style}>{React.Children.only(this.props.children)}</View>
         </TouchableNativeFeedback>
       )
-    } 
-      return (
-        <TouchableOpacity
-          {...rest}
-          onPress={this._handlePress}
-          style={style}
-          activeOpacity={pressOpacity}
-        >
-          {this.props.children}
-        </TouchableOpacity>
-      )
-    
+    }
+    return (
+      <TouchableOpacity
+        {...rest}
+        onPress={this._handlePress}
+        style={style}
+        activeOpacity={pressOpacity}
+      >
+        {this.props.children}
+      </TouchableOpacity>
+    )
   }
 }

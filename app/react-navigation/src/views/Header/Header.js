@@ -22,7 +22,8 @@ const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56
 
-const getAppBarHeight = isLandscape => Platform.OS === 'ios' ? (isLandscape && !Platform.isPad ? 32 : 44) : 56
+const getAppBarHeight = isLandscape =>
+  Platform.OS === 'ios' ? (isLandscape && !Platform.isPad ? 32 : 44) : 56
 
 class Header extends React.PureComponent {
   static defaultProps = {
@@ -211,15 +212,14 @@ class Header extends React.PureComponent {
         this._renderLeftComponent,
         this.props.leftInterpolator
       )
-    } 
-      return this._renderModularSubView(
-        props,
-        'left',
-        this._renderModularLeftComponent,
-        this.props.leftLabelInterpolator,
-        this.props.leftButtonInterpolator
-      )
-    
+    }
+    return this._renderModularSubView(
+      props,
+      'left',
+      this._renderModularLeftComponent,
+      this.props.leftLabelInterpolator,
+      this.props.leftButtonInterpolator
+    )
   }
 
   _renderTitle(props, options) {
@@ -388,26 +388,25 @@ class Header extends React.PureComponent {
           {right}
         </View>
       )
-    } 
-      return (
-        <MaskedViewIOS
-          {...wrapperProps}
-          maskElement={
-            <View style={styles.iconMaskContainer}>
-              <Image
-                source={require('../assets/back-icon-mask.png')}
-                style={styles.iconMask}
-              />
-              <View style={styles.iconMaskFillerRect} />
-            </View>
-          }
-        >
-          {title}
-          {left}
-          {right}
-        </MaskedViewIOS>
-      )
-    
+    }
+    return (
+      <MaskedViewIOS
+        {...wrapperProps}
+        maskElement={
+          <View style={styles.iconMaskContainer}>
+            <Image
+              source={require('../assets/back-icon-mask.png')}
+              style={styles.iconMask}
+            />
+            <View style={styles.iconMaskFillerRect} />
+          </View>
+        }
+      >
+        {title}
+        {left}
+        {right}
+      </MaskedViewIOS>
+    )
   }
 
   render() {

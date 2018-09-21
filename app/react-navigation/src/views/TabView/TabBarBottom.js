@@ -178,10 +178,9 @@ class TabBarBottom extends React.PureComponent {
 
     if (!Platform.isPad) {
       return isLandscape
-    } 
-      const maxTabBarItemWidth = this._tabItemMaxWidth()
-      return routes.length * maxTabBarItemWidth <= tabBarWidth
-    
+    }
+    const maxTabBarItemWidth = this._tabItemMaxWidth()
+    return routes.length * maxTabBarItemWidth <= tabBarWidth
   }
 
   _handleTabPress = index => {

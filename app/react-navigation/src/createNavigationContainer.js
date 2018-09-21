@@ -192,9 +192,9 @@ export default function createNavigationContainer(Component) {
           dispatchActionEvents()
         })
         return true
-      } 
-        dispatchActionEvents()
-      
+      }
+      dispatchActionEvents()
+
       return false
     }
 

@@ -58,7 +58,8 @@ class ResourceSavingSceneView extends React.PureComponent {
     )
   }
 
-  _mustAlwaysBeVisible = () => this.props.animationEnabled || this.props.swipeEnabled
+  _mustAlwaysBeVisible = () =>
+    this.props.animationEnabled || this.props.swipeEnabled
 }
 
 const styles = StyleSheet.create({

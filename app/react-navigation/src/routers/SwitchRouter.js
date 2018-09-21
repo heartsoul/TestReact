@@ -91,9 +91,8 @@ export default (routeConfigs, config = {}) => {
           ...possibleNextState,
           routes: nextRoutes,
         }
-      } 
-        nextState = possibleNextState
-      
+      }
+      nextState = possibleNextState
 
       return nextState
     },

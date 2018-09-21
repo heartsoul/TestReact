@@ -31,12 +31,10 @@ function getSceneIndicesForInterpolationInputRange(props) {
       currentSceneIndexInScenes > targetSceneIndexInScenes
     ) {
       return null
-    } 
-      return { first: index - 1, last: index + 1 }
-    
-  } 
+    }
     return { first: index - 1, last: index + 1 }
-  
+  }
+  return { first: index - 1, last: index + 1 }
 }
 
 export default getSceneIndicesForInterpolationInputRange

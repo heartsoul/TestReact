@@ -30,7 +30,7 @@ class LoginPage extends Component {
             <Text>登录</Text>
           </View>
         </TouchableOpacity>
-        <Button text="登录测试" onClick={() => login()}/>
+        <Button text="登录测试" onClick={() => login()} />
       </View>
     )
   }

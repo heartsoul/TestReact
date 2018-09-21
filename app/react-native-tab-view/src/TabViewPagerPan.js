@@ -97,10 +97,9 @@ export default class TabViewPagerPan<T: *> extends React.Component<Props<T>> {
     }
   }
 
-  _isMovingHorizontally = (evt: GestureEvent, gestureState: GestureState) => (
-      Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2) &&
-      Math.abs(gestureState.vx) > Math.abs(gestureState.vy * 2)
-    )
+  _isMovingHorizontally = (evt: GestureEvent, gestureState: GestureState) =>
+    Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2) &&
+    Math.abs(gestureState.vx) > Math.abs(gestureState.vy * 2)
 
   _canMoveScreen = (evt: GestureEvent, gestureState: GestureState) => {
     if (this.props.swipeEnabled === false) {

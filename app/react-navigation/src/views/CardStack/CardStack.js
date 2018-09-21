@@ -439,9 +439,8 @@ class CardStack extends React.Component {
     // TODO: validations: 'fade-in-place' or 'uikit' are valid
     if (this.props.headerTransitionPreset) {
       return this.props.headerTransitionPreset
-    } 
-      return 'fade-in-place'
-    
+    }
+    return 'fade-in-place'
   }
 
   _renderInnerScene(SceneComponent, scene) {

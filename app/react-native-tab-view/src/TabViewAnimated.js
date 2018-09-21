@@ -118,7 +118,8 @@ export default class TabViewAnimated<T: *> extends React.Component<
   _mounted: boolean = false
   _nextIndex: ?number
 
-  _renderScene = (props: SceneRendererProps<T> & Scene<T>) => this.props.renderScene(props)
+  _renderScene = (props: SceneRendererProps<T> & Scene<T>) =>
+    this.props.renderScene(props)
 
   _handleLayout = (e: any) => {
     const { height, width } = e.nativeEvent.layout
